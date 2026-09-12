@@ -4,17 +4,14 @@ import com.practice.assignment_1.model.Car;
 import com.practice.assignment_1.model.CarType;
 
 public class SuvBuilder implements CarBuilder {
-    private CarType carType = CarType.SUV;
+
+    private static final int MIN_SEATS = 4;
+    private static final int MAX_SEATS = 8;
+
     private String engine;
     private int seats = 5;
     private boolean hasGps = true;
     private boolean hasSunroof = true;
-
-    @Override
-    public CarBuilder setCarType(CarType type) {
-        this.carType = type;
-        return this;
-    }
 
     @Override
     public CarBuilder setEngine(String engine) {
@@ -24,9 +21,12 @@ public class SuvBuilder implements CarBuilder {
 
     @Override
     public CarBuilder setSeats(int seats) {
-        if (seats < 4 || seats > 8) {
-            throw new IllegalArgumentException("SUV seats must be between 4 and 8.");
+        if (seats < MIN_SEATS || seats > MAX_SEATS) {
+            throw new IllegalArgumentException(
+                    "SUV must have between 4 and 8 seats."
+            );
         }
+
         this.seats = seats;
         return this;
     }
@@ -46,8 +46,17 @@ public class SuvBuilder implements CarBuilder {
     @Override
     public Car build() {
         if (engine == null || engine.isBlank()) {
-            throw new IllegalStateException("Validation Error: SUV engine must not be empty.");
+            throw new IllegalStateException(
+                    "Engine specification is required for an SUV."
+            );
         }
-        return new Car(carType, engine, seats, hasGps, hasSunroof);
+
+        return new Car(
+                CarType.SUV,
+                engine,
+                seats,
+                hasGps,
+                hasSunroof
+        );
     }
 }
