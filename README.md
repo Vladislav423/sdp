@@ -1,9 +1,5 @@
 # Assignment 2 — Factory Method and Abstract Factory
 
-* **Student:** Vladislav Astashov
-* **Group:** SE-2537
-* **Target Commit:** 04f0a28
-
 ---
 
 ## 1. Project Purpose
